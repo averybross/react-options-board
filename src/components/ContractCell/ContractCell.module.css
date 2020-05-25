@@ -24,7 +24,6 @@
 }
 .ContractCell .cellContainer {
     padding: 3px;
-    transition: 400ms linear all;
     border: 1px solid transparent;
     border-left: 10px solid transparent;
 }
