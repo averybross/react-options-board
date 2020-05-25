@@ -1,2 +1,0 @@
-(this["webpackJsonpreact-options-board"]=this["webpackJsonpreact-options-board"]||[]).push([[5],{102:function(e,t,a){"use strict";a.r(t);var o=a(0),r=a.n(o),i=a(99),n=a.n(i),c=a(30);t.default=r.a.memo((function(e){var t=e.bitcoinPrice;return r.a.createElement("tr",{className:n.a.OptionsBoardPriceRow,"data-testid":"OptionsBoardPriceRow"},r.a.createElement("td",{colSpan:7},"Share Price: ",r.a.createElement(c.a,{price:t})))}))},99:function(e,t,a){e.exports={OptionsBoardPriceRow:"OptionsBoardPriceRow_OptionsBoardPriceRow__2aYfh"}}}]);
-//# sourceMappingURL=5.d77530fe.chunk.js.map

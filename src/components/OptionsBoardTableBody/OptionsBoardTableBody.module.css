@@ -2,7 +2,18 @@
     background-color: rgb(53, 114, 158) !important;
     text-align: center;
     position: sticky;
-    top: 3.5rem;
     z-index: 20;
+    top: 3.5rem;
     width: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .OptionsBoardTableBody .dateHeader td {
+        top: 0;
+    }
+    @media screen and (min-width: 768px) {
+        .OptionsBoardTableBody .dateHeader td {
+            top: 35px;
+        }
+    }
 }

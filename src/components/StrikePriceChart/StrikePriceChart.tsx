@@ -13,7 +13,7 @@ import { currencyFormatter } from '../CurrencyLabel/CurrencyLabel';
 
 import DarkUnica from 'highcharts/themes/avocado';
 import { formatStrike } from '../OptionRow/OptionRow';
-import { daysBetween } from '../OptionsBoardTableBody/OptionsBoardTableBody';
+import { daysBetween, transformDateForMobileSafari } from '../OptionsBoardTableBody/OptionsBoardTableBody';
 
 DarkUnica(Highcharts);
 
@@ -139,8 +139,8 @@ const StrikePriceChart: React.FC = () => {
       </Header>
       <div className={styles.chartDetail}>
         <div>
-          <h3>{ ContractsStore.optionsContracts ? focusedContract.type.charAt(0).toUpperCase() + focusedContract.type.slice(1) + ' Option - ' + formatStrike(focusedContract.strike_price) + ' Strike Price on ' + new Date(focusedContract.date_expires).toLocaleDateString('en-us') : ''}</h3>
-          <h4>{Math.round(daysBetween(new Date(), new Date(focusedContract.date_expires)))} days left</h4>
+          <h3>{ ContractsStore.optionsContracts ? focusedContract.type.charAt(0).toUpperCase() + focusedContract.type.slice(1) + ' Option - ' + formatStrike(focusedContract.strike_price) + ' Strike Price on ' + transformDateForMobileSafari(focusedContract.date_expires).toLocaleDateString('en-us') : ''}</h3>
+          <h4>{Math.round(daysBetween(new Date(), transformDateForMobileSafari(focusedContract.date_expires)))} days left</h4>
         </div>
         <div>
           <table>
@@ -165,7 +165,7 @@ const StrikePriceChart: React.FC = () => {
           </table>
         </div>
       </div>
-      <div ref={wrapperRef} style={{flex: 'auto', overflow: 'hidden', position: 'relative'}}>
+      <div ref={wrapperRef} style={{flex: 1, overflow: 'hidden', position: 'relative'}}>
         <HighchartsReact
           highcharts={Highcharts}
           options={options}

@@ -1,6 +1,6 @@
 .OptionsBoardTableHead.sticky tr:nth-child(1) th {
     position: sticky;
-    top: 0%;
+    top: 00%;
     left: 0%;
     width: 100vw;
     z-index: 10;;
@@ -22,4 +22,4 @@
 
 
 
-thead tr { position: sticky; top: 0; }
+thead tr { position: sticky; position: webkit-sticky; top: 0; }

@@ -16,12 +16,19 @@ export function daysBetween(startDate: Date, endDate: Date):number {
   return ((treatAsUTC(endDate) as unknown as number) - (treatAsUTC(startDate) as unknown as number)) / millisecondsPerDay;
 }
 
+export function transformDateForMobileSafari(date: string): Date {
+  return new Date(date.replace(/\s/, 'T').slice(0, -5))
+}
+
 const OptionsBoardDateRow: React.FC<{date: string}> = React.memo((props) => {
+
+  const date = transformDateForMobileSafari(props.date);
+  
   return (
     <tr className={classnames(styles.rowDate, styles.dateHeader)}>
       <td colSpan={7}>
         <div>
-        <span><strong>{new Date(props.date).toLocaleDateString("en-US")}</strong></span> - <span>{Math.round(daysBetween(new Date(), new Date(props.date)))} days left</span>
+          <span><strong>{date.toLocaleDateString("en-US")}</strong></span> - <span>{Math.round(daysBetween(new Date(), date))} days left</span>
         </div>
       </td>
     </tr>
@@ -39,18 +46,18 @@ const OptionsBoardTableBody:React.FC<OptionsBoardTableBodyProps> = (props) => {
       const contractRows = dateContracts.map(([put, call], index) => (
         <React.Fragment key={put.id}>
           {
-            ((index > 0
+            (((index > 0
             && (props.bitcoin.ask && props.bitcoin.bid)
             && put.strike_price > bitcoinPrice
             && dateContracts[index-1][0].strike_price < bitcoinPrice )
             ||
             (index === 0 && put.strike_price > bitcoinPrice))
-            && (props.bitcoin.ask && props.bitcoin.bid) && <OptionsBoardPriceRow key={date} bitcoinPrice={bitcoinPrice} />
+            && (props.bitcoin.ask && props.bitcoin.bid)) ? <OptionsBoardPriceRow key={date} bitcoinPrice={bitcoinPrice} />: ''
           }
           <OptionRow key={put.id} {...{put, call}} />
           {
             (index === dateContracts.length && put.strike_price < bitcoinPrice)
-              && <OptionsBoardPriceRow key={date} bitcoinPrice={bitcoinPrice} />
+              ? <OptionsBoardPriceRow key={date} bitcoinPrice={bitcoinPrice} /> : ''
           }
         </React.Fragment>
       )
