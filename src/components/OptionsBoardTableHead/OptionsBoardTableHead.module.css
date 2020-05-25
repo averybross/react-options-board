@@ -1,0 +1,25 @@
+.OptionsBoardTableHead.sticky tr:nth-child(1) th {
+    position: sticky;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    z-index: 10;;
+}
+.OptionsBoardTableHead th.strikeHeader {
+    width: 1% !important;
+    text-align: center !important;
+    padding: 1rem !important;
+    background: #21262e;
+}
+
+@media screen and (max-width: 768px) {
+    .oiHeader {
+        display: table-column;
+        width: 0 !important;
+        visibility: hidden;
+    }
+}
+
+
+
+thead tr { position: sticky; top: 0; }

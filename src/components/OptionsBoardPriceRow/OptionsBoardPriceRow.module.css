@@ -1,0 +1,8 @@
+.OptionsBoardPriceRow td {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    color: #DDDF0D;
+    /* line-height: 7px; */
+    /* background: #0b354a; */
+}

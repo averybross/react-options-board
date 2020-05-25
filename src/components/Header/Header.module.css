@@ -1,0 +1,13 @@
+.headerWrapper {
+    background: rgb(53, 65, 78);
+    color: white;
+    height: 35px;
+    -webkit-box-align: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex: 0 0 35px;
+    padding: 0px 15px;
+} 

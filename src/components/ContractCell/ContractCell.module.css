@@ -1,0 +1,101 @@
+.ContractCell  {
+    transition: 100ms background ease-in-out;
+    text-align: right !important;
+    cursor: pointer;
+}
+.ContractCell:hover {
+    background: #27272c;
+}
+.ContractCell:hover * {
+    font-weight: bold;
+}
+.ContractCell:active {
+    background: #4e4e59;
+}
+.ContractCell.active {
+    background: #404048;
+}
+.ContractCell.active .cellContainer {
+    border: 1px solid #05b3e3;
+}
+.ContractCell .cellContainer {
+    padding: 3px;
+}
+
+
+.contractWrapper {
+    display:flex;
+    flex-basis:50%;
+    text-align: right !important;
+}
+
+.ContractCell span {
+    display: flex;
+}
+
+.ContractCell td {
+    display: block;
+}
+
+.ContractCell .openInterest {
+    text-align: right !important;
+    flex: 1 1 60px;
+}
+
+.ContractCell .bidAskCell {
+    flex: 1 1 75px;
+}
+
+.ContractCell .bid {
+    color:#ddd;
+}
+
+.ContractCell .ask {
+    color: #fff;
+}
+
+.ContractCell:hover .bidAskCell, .ContractCell:hover  .openInterest {
+    color: #fff;
+}
+
+.ContractCell .contractWrapper.flipOI {
+    flex-flow: row wrap-reverse;
+}
+
+.ContractCell .contractWrapper span {
+    text-align: right !important;
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+
+    .ContractCell .bidAskCell {
+        flex-basis:50%;
+    }
+    .ContractCell .openInterest {
+        flex-basis:100%;
+        margin-top: 10px;
+        color: #ccc;
+    }
+    .ContractCell .openInterest::before {
+        content: "open interest: ";
+        color: rgb(158, 158, 158);
+        display: inline;
+    }
+    .ContractCell span {
+        flex: 1 1 40px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 40px;
+    }
+    .ContractCell .contractWrapper {
+        display:flex;
+        flex-basis:50%;
+        flex-flow: row wrap-reverse;
+        text-align: right !important;
+    }
+    .ContractCell .contractWrapper.flipOI {
+        flex-flow: row wrap;
+        text-align: right !important;
+    }
+}

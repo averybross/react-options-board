@@ -1,0 +1,2 @@
+(this["webpackJsonpreact-options-board"]=this["webpackJsonpreact-options-board"]||[]).push([[4],{100:function(e,r,a){e.exports={headerWrapper:"Header_headerWrapper__1oKyh"}},103:function(e,r,a){"use strict";a.r(r);var n=a(0),t=a.n(n),o=a(17),p=a.n(o),s=a(100),c=a.n(s);r.default=t.a.memo((function(e){return t.a.createElement("div",{className:p()(c.a.headerWrapper)},e.children)}))}}]);
+//# sourceMappingURL=4.b24d37aa.chunk.js.map

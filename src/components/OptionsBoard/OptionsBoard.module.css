@@ -1,0 +1,130 @@
+
+
+.boardWrapper {
+    overflow: scroll;
+    flex: 3;
+}
+
+.OptionsBoard {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.OptionsBoard table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+    width: 100%;
+    position: relative;
+}
+.tableWrapper {
+    margin-right: 1px;
+}
+
+.OptionsBoard .bitcoinPrice {
+    text-align: center;
+    padding:2rem;
+    font-size: 2rem;
+}
+.OptionsBoard .bitcoinPrice span {
+    color: #DDDF0D;
+}
+
+.OptionsBoard .dateHeader {
+    font-weight: bold;
+    transition: background 0.2s ease;
+    font-size: 12px;
+    text-align: center;
+    padding: 3px;
+    width: 100%;
+}
+.OptionsBoard h3 {
+    font-size: 14px;
+    -webkit-box-align: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    margin: 0px;
+    width: 50%;
+    padding: 0px 0px 0px 15px;
+    border-left: 1px solid grey;
+}
+
+.OptionsBoard h3:first-child {
+    border: none;
+    padding: 0px;
+}
+
+.rowDate {
+    background: grey;
+}
+
+.OptionsBoard thead tr {
+    background: #14141E;
+    position: relative;
+    font-size: 10px;
+}
+
+.OptionsBoard thead th {
+    background: #14141E;
+    position: relative;
+    font-weight: 100;
+    font-size: 11px;
+    flex: 1 1 75px;
+    flex-basis: 75px;
+}
+
+/* .OptionsBoard tr.columnLabels {
+} */
+
+.OptionsBoard thead th {
+    position: relative;
+    width: auto !important;
+    text-align: right !important;
+    padding: 1rem 2rem !important;
+}
+
+.OptionsBoard tr:nth-child(even) {
+    background: #14141E;
+}
+
+.OptionsBoard tr:nth-child(odd) {
+    background: #08080C;
+}
+
+.OptionsBoard tr:nth-child(even) td:nth-child(2) {
+    background: #22262E !important;
+}
+
+.OptionsBoard tr:nth-child(odd) td:nth-child(2) {
+    background: #2F333B !important;
+}
+
+.OptionsBoard td > div {
+    position: relative;
+    padding: 4px 6px;
+}
+
+.OptionsBoard .bidAskColumnHeader {
+    flex: 1 1 75px;
+}
+.OptionsBoard .oiHeader {
+    flex: 1 1 40px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 40px;
+}
+
+.OptionsBoard th:not(:last-child)::after {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 1px;
+    height: 12px;
+    background-color: rgb(117, 117, 117);
+    content: "";
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
