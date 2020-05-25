@@ -1,1 +1,0 @@
-{"version":3,"sources":["OptionsBoardPriceRow.module.css"],"names":[],"mappings":"AAAA,qDACI,iBAAkB,CAClB,gBAAiB,CACjB,cAAe,CACf,aAGJ","file":"5.f17a1091.chunk.css","sourcesContent":[".OptionsBoardPriceRow td {\n    text-align: center;\n    font-size: 1.1rem;\n    padding: 1rem 0;\n    color: #DDDF0D;\n    /* line-height: 7px; */\n    /* background: #0b354a; */\n}"]}

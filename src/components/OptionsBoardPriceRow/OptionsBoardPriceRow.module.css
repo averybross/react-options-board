@@ -1,8 +1,27 @@
 .OptionsBoardPriceRow td {
     text-align: center;
     font-size: 1.1rem;
-    padding: 1rem 0;
     color: #DDDF0D;
     /* line-height: 7px; */
     /* background: #0b354a; */
+}
+
+@media screen and (max-width: 576px) {
+    .OptionsBoardPriceRow td {
+        padding: .25rem 0;
+    }
+}
+@media screen and (min-width: 576px) {
+    .OptionsBoardPriceRow td {
+        padding: .5rem 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    .OptionsBoardPriceRow td {
+        padding: 1rem 0;
+    }
+}
+@media screen and (min-width: 992px) {
+}
+@media screen and (min-width: 1200px) {
 }

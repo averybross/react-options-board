@@ -139,8 +139,9 @@ const StrikePriceChart: React.FC = () => {
       </Header>
       <div className={styles.chartDetail}>
         <div>
-          <h3>{ ContractsStore.optionsContracts ? focusedContract.type.charAt(0).toUpperCase() + focusedContract.type.slice(1) + ' Option - ' + formatStrike(focusedContract.strike_price) + ' Strike Price on ' + transformDateForMobileSafari(focusedContract.date_expires).toLocaleDateString('en-us') : ''}</h3>
-          <h4>{Math.round(daysBetween(new Date(), transformDateForMobileSafari(focusedContract.date_expires)))} days left</h4>
+          <h3>{ (ContractsStore.optionsContracts ? `${formatStrike(focusedContract.strike_price)} Strike Price` : '') }</h3>
+          <h3>{Math.round(daysBetween(new Date(), transformDateForMobileSafari(focusedContract.date_expires)))} days left</h3>
+          <h4>{transformDateForMobileSafari(focusedContract.date_expires).toLocaleDateString('en-us')} - {focusedContract.type.charAt(0).toUpperCase() + focusedContract.type.slice(1) + ' Option'}</h4>
         </div>
         <div>
           <table>

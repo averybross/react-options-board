@@ -10,7 +10,7 @@
 
 .StrikePriceChart h3 {
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 .5rem;
 }
 
 .chartWrapper {

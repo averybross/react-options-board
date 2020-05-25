@@ -16,10 +16,17 @@
     background: #404048;
 }
 .ContractCell.active .cellContainer {
-    border: 1px solid #05b3e3;
+    border-color: #35729e;
+    border-left-color: #35729e;
+}
+.ContractCell.active .cellContainer span { 
+    color: white;
 }
 .ContractCell .cellContainer {
     padding: 3px;
+    transition: 400ms linear all;
+    border: 1px solid transparent;
+    border-left: 10px solid transparent;
 }
 
 
@@ -40,6 +47,7 @@
 .ContractCell .openInterest {
     text-align: right !important;
     flex: 1 1 60px;
+    color: #aaa;
 }
 
 .ContractCell .bidAskCell {
@@ -47,7 +55,7 @@
 }
 
 .ContractCell .bid {
-    color:#ddd;
+    color:#fff;
 }
 
 .ContractCell .ask {
@@ -56,11 +64,11 @@
 
 .ContractCell:hover .bidAskCell, .ContractCell:hover  .openInterest {
     color: #fff;
-}
+}   
 
-.ContractCell .contractWrapper.flipOI {
+/* .ContractCell .contractWrapper.flipOI {
     flex-flow: row wrap-reverse;
-}
+} */
 
 .ContractCell .contractWrapper span {
     text-align: right !important;
@@ -69,16 +77,20 @@
 
 @media screen and (max-width: 768px) {
 
+    .ContractCell {
+        font-size: 1rem;
+    }
+
     .ContractCell .bidAskCell {
         flex-basis:50%;
     }
     .ContractCell .openInterest {
         flex-basis:100%;
-        margin-top: 10px;
+        margin-top: 0rem;
         color: #ccc;
     }
     .ContractCell .openInterest::before {
-        content: "open interest: ";
+        content: "OI: ";
         color: rgb(158, 158, 158);
         display: inline;
     }
@@ -87,6 +99,8 @@
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 40px;
+        font-weight: 600;
+        font-size: 1.2rem;
     }
     .ContractCell .contractWrapper {
         display:flex;
@@ -97,5 +111,17 @@
     .ContractCell .contractWrapper.flipOI {
         flex-flow: row wrap;
         text-align: right !important;
+    }
+}
+
+
+@media screen and (min-width: 576px) {
+    .ContractCell .openInterest {
+        margin-top: .5rem;
+    }
+}
+@media screen and (min-width: 768px) {
+    .ContractCell .openInterest {
+        margin-top: 0;
     }
 }

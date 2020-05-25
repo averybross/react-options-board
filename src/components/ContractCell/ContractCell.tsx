@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classnames from 'classnames';
 import styles from './ContractCell.module.css';
 import CurrencyLabel from '../CurrencyLabel/CurrencyLabel';
@@ -12,6 +12,8 @@ function kFormatter(num: number) {
 }
 
 const ContractCell: React.FC<ContractCellProps> = (props) => {
+
+  const isInitialMount = useRef(true);
 
   const OI =(<CurrencyLabel key={0} className={styles.openInterest}>
     {parseInt(props.contract.open_interest) ? kFormatter(parseInt(props.contract.open_interest)) : '-'}
@@ -36,15 +38,20 @@ const ContractCell: React.FC<ContractCellProps> = (props) => {
   useEffect(() => {
 
     function setUpdate() {
-      setBackgroundColor(props.contract.type === 'put' ? "#00ff4930" : "#ff000021");
+      setBackgroundColor("#00ff4930");
       updateTimer.current = window.setTimeout(() => {
         setBackgroundColor("");
         updateTimer.current = null;
-      }, 300);
+      }, 400);
     }
     
-    if(!updateTimer.current) {
-      setUpdate();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+  } else {
+      // Your useEffect code here to be run on update
+      if(!updateTimer.current) {
+        setUpdate();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.contract.type, props.contract.booktops[0].bid, props.contract.booktops[0].ask]);
