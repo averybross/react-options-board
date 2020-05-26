@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+![screenshot](screenshot.png)
+
+## Prerequisites
+
+Define required environment variables:
+```
+REACT_APP_SERVER_URL=http://localhost:3001/
+MONGODB_URI=mongodb://localhost:27017/react-options-board
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
