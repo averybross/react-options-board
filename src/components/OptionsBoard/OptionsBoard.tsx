@@ -11,7 +11,7 @@ import { OptionsBoardProps } from './OptionsBoard.lazy';
 import ContractsStore from '../../stores/ContractsStore';
 import { observer, inject } from 'mobx-react';
 
-const socket = io();
+const socket = io(process.env.REACT_APP_WEBSOCKET_URL as string);
 
 export interface Booktop {
   contract_id: number;
@@ -59,7 +59,7 @@ export interface Dictionary<T> {
 const OptionsBoard: React.FC<OptionsBoardProps> = (props) => {
 
   useEffect(() => {
-    fetch(`https://lxboard.herokuapp.com/api/?after_ts=${new Date().toISOString()}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}api/?after_ts=${new Date().toISOString()}`)
         .then((resp) => resp.json())
         .then(({optionsContracts, optionsDictionary, nextDayContracts, activeNextDayContract}) => {
             ContractsStore.optionsContracts = optionsContracts;

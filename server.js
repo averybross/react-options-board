@@ -3,8 +3,42 @@ const cors = require('cors')
 const express = require('express');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 3000;
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const booktopSchema = new mongoose.Schema({
+    contract_id: Number,
+    bid: Number,
+    clock: Number,
+    ask: Number,
+    contract_type: String,
+    datetime: Number,
+});
+
+const contractSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    booktops: [booktopSchema],
+    label: String,
+    underlying_asset: String,
+    collateral_asset: String,
+    active: String,
+    type: String,
+    strike_price: Number,
+    min_increment: String,
+    date_live: String,
+    date_expires: String,
+    date_exercise: String,
+    derivative_type: String,
+    open_interest: String,
+    is_one_day: String,
+});
+
+var Contact = mongoose.model('Contact', contractSchema);
+var Booktop = mongoose.model('Booktop', booktopSchema);
+
+const PORT = process.env.SERVER_PORT || 3000;
 
 const app = express();
 
@@ -25,10 +59,11 @@ app.get('/api/booktops', async function (req, res) {
 });
 
 app.get('/api', async function (req, res) {
+    
     const contractsCall = fetch(`https://trade.ledgerx.com/api/contracts?after_ts=${req.query.after_ts}&limit=0&offset=0`)
         .then(res => res.json());
 
-    const booktopsCall = fetch('https://trade.ledgerx.com/api/book-tops')
+    const booktopsCall = fetch(`https://trade.ledgerx.com/api/book-tops`)
         .then(res => res.json());
 
     let [{ data: contracts }, { data: booktops}] = await Promise.all([contractsCall, booktopsCall])
@@ -116,8 +151,6 @@ app.get('/api', async function (req, res) {
     res.send(response);
 })
 
-app.use(express.static(__dirname + '/'));
-
 // Configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -148,8 +181,15 @@ io.on("connection", (socket) => {
     // initialize this client's sequence number
     sequenceNumberByClient.set(socket, 1);
 
+
     ws.on('message', (msg) => {
+        
         socket.emit('message', msg);
+        
+        const booktopData = JSON.parse(msg);
+
+        new (mongoose.model('Booktop'))(booktopData).save()
+
     })
 
     // when socket disconnects, remove it from the list:
