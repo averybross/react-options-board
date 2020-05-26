@@ -85,7 +85,7 @@ const StrikePriceChart: React.FC = () => {
         }
     },
     legend: {
-        enabled: true
+        enabled: false
     },
     yAxis: {
       title: {
@@ -139,9 +139,10 @@ const StrikePriceChart: React.FC = () => {
       </Header>
       <div className={styles.chartDetail}>
         <div>
-          <h3>{ (ContractsStore.optionsContracts ? `${formatStrike(focusedContract.strike_price)} Strike Price` : '') }</h3>
-          <h3>{Math.round(daysBetween(new Date(), transformDateForMobileSafari(focusedContract.date_expires)))} days left</h3>
+          <h3 style={{marginBottom: '.5rem'}}>
+          { (ContractsStore.optionsContracts ? `${formatStrike(focusedContract.strike_price)} Strike Price` : '') } - {Math.round(daysBetween(new Date(), transformDateForMobileSafari(focusedContract.date_expires)))} days left</h3>
           <h4>{transformDateForMobileSafari(focusedContract.date_expires).toLocaleDateString('en-us')} - {focusedContract.type.charAt(0).toUpperCase() + focusedContract.type.slice(1) + ' Option'}</h4>
+          <h4>Open Interest - {focusedContract.open_interest ? formatStrike(parseInt(focusedContract.open_interest)*100) : 'None'}</h4>
         </div>
         <div>
           <table>
@@ -157,10 +158,6 @@ const StrikePriceChart: React.FC = () => {
               <tr>
                 <td className={styles.cellBid}>Bid</td>
                 <td className={styles.cellBid}>{focusedContract.booktops[0].bid ? currencyFormatter.format(focusedContract.booktops[0].bid/100) : 'None'}</td>
-              </tr>
-              <tr>
-                <td className={styles.cellOI}>OI</td>
-                <td className={styles.cellOI}>{focusedContract.open_interest ? formatStrike(parseInt(focusedContract.open_interest)*100) : 'None'}</td>
               </tr>
             </tbody>
           </table>

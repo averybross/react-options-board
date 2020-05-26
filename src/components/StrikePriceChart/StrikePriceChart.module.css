@@ -8,6 +8,10 @@
     flex: 2;
 }
 
+.StrikePriceChart h4 {
+    margin: 0 0 .25rem;
+}
+
 .StrikePriceChart h3 {
     font-weight: 600;
     margin: 0 0 .5rem;
