@@ -134,6 +134,8 @@ const OptionsBoard: React.FC<OptionsBoardProps> = (props) => {
         </table>
       </div>
     </div>
-  </div> : <div></div>}
+  </div> : <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexBasis: '100vw'}}>
+    <h1>Loading...</h1>
+  </div>}
 
 export default inject('ContractsStore')(observer(OptionsBoard));
