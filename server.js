@@ -35,8 +35,31 @@ const contractSchema = new mongoose.Schema({
     is_one_day: String,
 });
 
-var Contact = mongoose.model('Contact', contractSchema);
+var Contract = mongoose.model('Contract', contractSchema);
 var Booktop = mongoose.model('Booktop', booktopSchema);
+
+async function fetchContracts(after_ts) {
+    const newContracts = (await fetch(`https://trade.ledgerx.com/api/contracts?after_ts=${after_ts}&limit=0&offset=0`)
+        .then(res => res.json())).data;
+        
+    const deleteBooktopsCall = await Contract.deleteMany({})
+    const insertBooktopsCall = await Contract.insertMany(newContracts)
+}
+
+function getContracts() {
+    return Contract.find({}).lean();
+}
+
+async function fetchBooktops() {
+    // return Booktop.find({}).lean();
+    return (await fetch(`https://trade.ledgerx.com/api/book-tops`).then(res => res.json())).data;
+}
+
+async function getExistingBooktops() {
+    return Booktop.find({}).lean();
+}
+
+fetchContracts(new Date().toISOString())
 
 const PORT = process.env.PORT || 3001;
 
@@ -60,14 +83,11 @@ app.get('/api/booktops', async function (req, res) {
 
 app.get('/api', async function (req, res) {
     
-    const contractsCall = fetch(`https://trade.ledgerx.com/api/contracts?after_ts=${req.query.after_ts}&limit=0&offset=0`)
-        .then(res => res.json());
+    const contracts = await getContracts();
+    const booktops = await fetchBooktops();
 
-    const booktopsCall = fetch(`https://trade.ledgerx.com/api/book-tops`)
-        .then(res => res.json());
-
-    let [{ data: contracts }, { data: booktops}] = await Promise.all([contractsCall, booktopsCall])
-
+    // const existingBooktops = await getExistingBooktops();
+    
     const response = contracts
         .sort((a, b) => {
             if(a.derivative_type > b.derivative_type) {
@@ -105,9 +125,11 @@ app.get('/api', async function (req, res) {
             const lookupId = contract.id;
             const firstBooktop = booktops.filter(booktop => booktop.contract_id === lookupId);
 
-            firstBooktop[0].datetime = Date.now();
-
-            contract.booktops = [firstBooktop[0]]
+            if(!contract.booktops.length) {
+                firstBooktop[0].datetime = Date.now();
+                contract.booktops = [firstBooktop[0]];
+            }
+            
 
             if(contract.derivative_type === 'options_contract') {
 
@@ -128,7 +150,7 @@ app.get('/api', async function (req, res) {
 
             } else {
                 nextDayContracts[contract.id] = contract;
-                if(contract.active) {
+                if(contract.active === 'true') {
                     activeNextDayContract = contract;
                 }
             }
@@ -146,8 +168,6 @@ app.get('/api', async function (req, res) {
             activeNextDayContract: undefined,
         });
 
-
-        
     res.send(response);
 })
 
@@ -175,21 +195,29 @@ let sequenceNumberByClient = new Map();
 
 const ws = new WebSocket('wss://trade.ledgerx.com/api/ws');
 
+ws.on('message', (msg) => {
+    
+    const booktopData = JSON.parse(msg);
+
+    booktopData.datetime = Date.now();
+
+    Contract.findOne({ id: booktopData.contract_id}).exec((err, result) => {
+        if(!result) return;
+        
+        result.booktops.push(booktopData)
+        result.save();
+    })
+
+})
+
 // event fired every time a new client connects:
 io.on("connection", (socket) => {
     console.info(`Client connected [id=${socket.id}]`);
     // initialize this client's sequence number
     sequenceNumberByClient.set(socket, 1);
 
-
     ws.on('message', (msg) => {
-        
         socket.emit('message', msg);
-        
-        const booktopData = JSON.parse(msg);
-
-        new (mongoose.model('Booktop'))(booktopData).save()
-
     })
 
     // when socket disconnects, remove it from the list:
