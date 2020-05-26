@@ -38,7 +38,7 @@ const contractSchema = new mongoose.Schema({
 var Contact = mongoose.model('Contact', contractSchema);
 var Booktop = mongoose.model('Booktop', booktopSchema);
 
-const PORT = process.env.SERVER_PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
