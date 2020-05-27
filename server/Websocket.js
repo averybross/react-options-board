@@ -40,7 +40,7 @@ class WebsocketAPI {
                 if(err || !result) return;
                 
                 result.booktops.push(booktopData)
-                result.save();
+                result.update();
             })
         
         })

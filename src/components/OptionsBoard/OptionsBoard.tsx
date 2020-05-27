@@ -59,7 +59,7 @@ export interface Dictionary<T> {
 const OptionsBoard: React.FC<OptionsBoardProps> = (props) => {
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}api/?after_ts=${new Date().toISOString()}`)
+    fetch(`api/?after_ts=${new Date().toISOString()}`)
         .then((resp) => resp.json())
         .then(({optionsContracts, optionsDictionary, nextDayContracts, activeNextDayContract}) => {
             ContractsStore.optionsContracts = optionsContracts;
