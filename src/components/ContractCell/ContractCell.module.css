@@ -13,7 +13,7 @@
     background: #4e4e59;
 }
 .ContractCell.active {
-    background: #404048;
+    background: #404048 !important;
 }
 .ContractCell.active .cellContainer {
     border-color: #35729e;
